@@ -1,0 +1,16 @@
+# docker-compose for phlax/systemd-docker
+#
+version: "2.4"
+services:
+
+  systemd-docker:
+    image: phlax/systemd-docker
+    cap_add:
+    - SYS_ADMIN
+    build:
+      context: ./docker
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+    - /run
+    - /tmp

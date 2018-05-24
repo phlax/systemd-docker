@@ -10,6 +10,7 @@ apt-get install \
    -y \
    -qq \
    --no-install-recommends \
+   --no-install-suggests \
    $APP_DEBS
 
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen

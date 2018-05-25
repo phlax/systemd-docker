@@ -33,8 +33,7 @@ RUN /tmp/install/install.sh
 # Build stage
 FROM root as builder
 
-ENV APP_PKG="aiozmq zope.dottedname msgpack" \
-    APP_BUILD_DEBS="build-essential \
+ENV APP_BUILD_DEBS="build-essential \
         git \
         libsystemd-dev \
         pkg-config \

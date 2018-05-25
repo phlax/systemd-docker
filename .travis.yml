@@ -23,6 +23,9 @@ script:
   - docker-compose exec systemd-docker systemctl -l --no-pager status
   - docker-compose exec systemd-docker journalctl --all -l --no-pager
 
+  # check dbus availability
+  - docker-compose exec systemd-docker busctl --no-pager
+
   # stop the server
   - docker-compose stop systemd-docker
   - docker-compose logs systemd-docker

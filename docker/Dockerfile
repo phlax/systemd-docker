@@ -20,7 +20,9 @@ ARG APP_DIR=/app
 ENV DEBIAN_FRONTEND=noninteractive \
     APP_DIR=$APP_DIR \
     APP_USERNAME=$APP_USERNAME \
-    APP_DEBS="locales \
+    APP_DEBS="dbus \
+       locales \
+       policykit-1 \
        python3-minimal \
        systemd \
        virtualenv"

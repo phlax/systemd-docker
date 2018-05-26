@@ -50,9 +50,6 @@ FROM root
 ENV PYTHONPATH=/app/src \
     APP_SERVER=
 
-#COPY ./app /tmp/app
-#RUN /tmp/app/create.sh
-
 # the chown flag has to be hardcoded for now
 COPY --chown=app:app --from=builder "$APP_DIR" "$APP_DIR"
 

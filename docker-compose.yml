@@ -4,13 +4,13 @@ version: "2.4"
 services:
 
   systemd-docker:
-    image: phlax/systemd-docker
-    cap_add:
-    - SYS_ADMIN
+    image: phlax/systemd
+    tty: true
     build:
       context: ./docker
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     tmpfs:
     - /run
+    - /run/lock
     - /tmp

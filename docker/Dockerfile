@@ -10,7 +10,11 @@ MAINTAINER Ryan Northey <ryan@synca.io>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+ARG SYSTEMD_USER_ID=1000
+ARG SYSTEMD_USERNAME=system
+
 RUN apt-get update -qq \
+    && apt dist-upgrade -qq -y \
     && apt-get install \
 	-y \
 	-qq \
@@ -38,10 +42,18 @@ RUN cd /lib/systemd/system/sysinit.target.wants/; ls | grep -v systemd-tmpfiles-
     rm -rf /lib/systemd/system/plymouth*; \
     rm -rf /lib/systemd/system/systemd-update-utmp*;
 
+RUN useradd \
+    -m \
+    -u $SYSTEMD_USER_ID \
+    -d /home/$SYSTEMD_USERNAME \
+    -k /etc/skel \
+    -s /bin/bash \
+  $SYSTEMD_USERNAME
+
 RUN systemctl set-default multi-user.target
 
-COPY start-systemd /usr/local/bin
+COPY start-systemd /usr/bin
 
 STOPSIGNAL SIGRTMIN+3
 VOLUME ["/sys/fs/cgroup"]
-CMD ["/usr/local/bin/start-systemd"]
+CMD ["/usr/bin/start-systemd"]

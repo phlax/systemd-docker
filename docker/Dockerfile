@@ -1,4 +1,4 @@
-# phlax/zmq
+# phlax/systemd
 #
 # VERSION       0.0.1
 
@@ -53,6 +53,9 @@ RUN useradd \
 RUN systemctl set-default multi-user.target
 
 COPY start-systemd /usr/bin
+
+HEALTHCHECK --interval=10s --timeout=5s --retries=20 \
+	CMD systemctl status | grep running || exit 1
 
 STOPSIGNAL SIGRTMIN+3
 VOLUME ["/sys/fs/cgroup"]
